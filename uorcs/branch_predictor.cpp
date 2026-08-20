@@ -51,7 +51,7 @@ uint32_t branch_predictor_t::get_bimodal_index(uint64_t pc) {
 // ==============================================================================
 uint32_t branch_predictor_t::get_gshare_index(uint64_t pc) {
     uint32_t gh_bits = this->global_history % PREDICTOR_TABLE_SIZE;
-    uint32_t pc_bits = pc & PREDICTOR_TABLE_SIZE -1;
+    uint32_t pc_bits = pc & (PREDICTOR_TABLE_SIZE -1);
 
     return pc_bits ^ gh_bits;  // XOR
 };

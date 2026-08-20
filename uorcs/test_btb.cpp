@@ -75,11 +75,7 @@ int main() {
     // Teste 6: estresse com MAIS PCs distintos do que a capacidade total da
     // BTB (12288 entradas). Espalhamos os PCs por todos os 1024 sets, com
     // 13 PCs por set (13 * 1024 = 13312 PCs distintos, ultrapassando as 12
-    // vias por set). Esperamos uma taxa de acerto BAIXA na primeira passada
-    // (cada PC ainda é novo), mas alta na segunda passada SE o programa
-    // tivesse localidade -- aqui usamos para confirmar que o LRU realmente
-    // reage sob pressão de capacidade real, diferente dos traces reais que
-    // tinham espaco de sobra.
+    // vias por set).
     // =========================================================================
     {
         btb_t stress_btb;
@@ -92,11 +88,6 @@ int main() {
         uint64_t misses = 0;
         uint64_t cycle = 0;
 
-        // Primeira passada: acessa todos os PCs distintos uma vez.
-        // Cada set recebe 13 PCs, mas so tem 12 vias -- entao, para cada
-        // set, o 13o PC necessariamente forca um miss (nao ha como os 13
-        // caberem). Portanto, esperamos pelo menos 1024 misses "estruturais"
-        // so nessa passada, alem dos misses triviais de primeira visita.
         for (uint32_t set = 0; set < BTB_SETS; set++) {
             for (uint32_t i = 0; i < pcs_per_set; i++) {
                 uint64_t pc = set + (uint64_t)i * BTB_SETS;

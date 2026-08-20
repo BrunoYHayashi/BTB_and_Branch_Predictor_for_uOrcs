@@ -2,8 +2,8 @@
 #define BRANCH_PREDICTOR_HPP
 
 #include <cstdint>
-#define PREDICTOR_TABLE_SIZE 1024  // Dito no artigo
-#define GLOBAL_HISTORY_BITS 10     // lg PREDICTOR_TABLE_SIZE
+#define PREDICTOR_TABLE_SIZE 64  // Dito no artigo
+#define GLOBAL_HISTORY_BITS 6    // lg PREDICTOR_TABLE_SIZE
 
 // ==============================================================================
 // Contador de 2 bits (0..3), usado nas 3 tabelas
